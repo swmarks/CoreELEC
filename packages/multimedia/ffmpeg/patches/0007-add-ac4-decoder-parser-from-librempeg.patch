@@ -1,5 +1,5 @@
 diff --git a/libavcodec/Makefile b/libavcodec/Makefile
-index 1410bd8142..854d2d9fbb 100644
+index 95ba308504..17216de26d 100644
 --- a/libavcodec/Makefile
 +++ b/libavcodec/Makefile
 @@ -211,6 +211,7 @@ OBJS-$(CONFIG_AAC_ENCODER)             += aacenc.o aaccoder.o aacenctab.o    \
@@ -10,7 +10,7 @@ index 1410bd8142..854d2d9fbb 100644
  OBJS-$(CONFIG_AC3_DECODER)             += ac3dec_float.o ac3dec_data.o ac3.o \
                                            kbdwin.o ac3tab.o ac3_channel_layout_tab.o
  OBJS-$(CONFIG_AC3_FIXED_DECODER)       += ac3dec_fixed.o ac3dec_data.o ac3.o \
-@@ -1237,6 +1238,7 @@ OBJS-$(CONFIG_LIBZVBI_TELETEXT_DECODER)   += libzvbi-teletextdec.o ass.o
+@@ -1234,6 +1235,7 @@ OBJS-$(CONFIG_LIBZVBI_TELETEXT_DECODER)   += libzvbi-teletextdec.o ass.o
  # parsers
  OBJS-$(CONFIG_AAC_LATM_PARSER)         += latm_parser.o
  OBJS-$(CONFIG_AAC_PARSER)              += aac_parser.o aac_ac3_parser.o
@@ -8593,10 +8593,10 @@ index 0000000000..1eb24b22f2
 +
 +#endif /* AVCODEC_AC4DEC_DATA_H */
 diff --git a/libavcodec/allcodecs.c b/libavcodec/allcodecs.c
-index 695214f192..37907aa0a1 100644
+index 47eded261f..d865e49b72 100644
 --- a/libavcodec/allcodecs.c
 +++ b/libavcodec/allcodecs.c
-@@ -436,6 +436,7 @@ extern const FFCodec ff_aac_fixed_decoder;
+@@ -426,6 +426,7 @@ extern const FFCodec ff_aac_fixed_decoder;
  extern const FFCodec ff_aac_latm_decoder;
  extern const FFCodec ff_ac3_encoder;
  extern const FFCodec ff_ac3_decoder;
@@ -8618,10 +8618,10 @@ index 4185c4206f..2ea35e1bd5 100644
  /**
   * Generate a Kaiser-Bessel Derived Window.
 diff --git a/libavcodec/parsers.c b/libavcodec/parsers.c
-index 162b96cb69..d5ddeed7af 100644
+index b54442a0ea..89b4c8f4ea 100644
 --- a/libavcodec/parsers.c
 +++ b/libavcodec/parsers.c
-@@ -40,6 +40,7 @@ FF_ENABLE_DEPRECATION_WARNINGS
+@@ -24,6 +24,7 @@
  extern const FFCodecParser ff_aac_parser;
  extern const FFCodecParser ff_aac_latm_parser;
  extern const FFCodecParser ff_ac3_parser;
@@ -8630,10 +8630,10 @@ index 162b96cb69..d5ddeed7af 100644
  extern const FFCodecParser ff_ahx_parser;
  extern const FFCodecParser ff_amr_parser;
 diff --git a/libavformat/mpegts.c b/libavformat/mpegts.c
-index 427bb88a3e..d0464eb09c 100644
+index 076020509d..7b5f041aff 100644
 --- a/libavformat/mpegts.c
 +++ b/libavformat/mpegts.c
-@@ -2247,6 +2247,11 @@ int ff_parse_mpeg2_descriptor(AVFormatContext *fc, AVStream *st, int stream_type
+@@ -2296,6 +2296,11 @@ int ff_parse_mpeg2_descriptor(AVFormatContext *fc, AVStream *st, int stream_type
          ext_desc_tag = get8(pp, desc_end);
          if (ext_desc_tag < 0)
              return AVERROR_INVALIDDATA;
@@ -8646,10 +8646,10 @@ index 427bb88a3e..d0464eb09c 100644
              ext_desc_tag == 0x80) { /* User defined (provisional Opus) */
              if (!st->codecpar->extradata) {
 diff --git a/libavformat/mpegts.h b/libavformat/mpegts.h
-index 18f326b8bf..8fa4385e33 100644
+index 58ef24848b..4f9b6891ce 100644
 --- a/libavformat/mpegts.h
 +++ b/libavformat/mpegts.h
-@@ -209,6 +209,7 @@ https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/
+@@ -210,6 +210,7 @@ https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/
  
  /* ISO/IEC 13818-1 Table 2-109 */
  #define JXS_VIDEO_DESCRIPTOR         0x14 /* JPEG-XS descriptor */
@@ -8657,11 +8657,3 @@ index 18f326b8bf..8fa4385e33 100644
  #define LCEVC_VIDEO_DESCRIPTOR       0x17 /* LCEVC video descriptor */
  #define LCEVC_LINKAGE_DESCRIPTOR     0x18 /* LCEVC linkage descriptor */
  
-@@ -228,6 +229,7 @@ https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/
- /* DVB descriptor_tag_extension values from
-    ETSI EN 300 468 Table 109: Possible locations of extended descriptors */
- #define SUPPLEMENTARY_AUDIO_DESCRIPTOR 0x06
-+#define AC4_DESCRIPTOR 0x15
- 
- /** see "Dolby Vision Streams Within the MPEG-2 Transport Stream Format"
- https://professional.dolby.com/siteassets/content-creation/dolby-vision-for-content-creators/dolby-vision-bitstreams-in-mpeg-2-transport-stream-multiplex-v1.2.pdf */
